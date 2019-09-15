@@ -157,10 +157,10 @@ SUBSYSTEM_DEF(ticker)
 				//lobby stats for statpanels
 			if(isnull(timeLeft))
 				timeLeft = max(0,start_at - world.time)
-			totalPlayers = LAZYLEN(GLOB.new_player_list)
+			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
-			for(var/i in GLOB.new_player_list)
-				var/mob/dead/new_player/player = i
+			for(var/i in GLOB.new_player_list)
+				var/mob/dead/new_player/player = i
 				if(player.ready == PLAYER_READY_TO_PLAY)
 					++totalPlayersReady
 
@@ -344,8 +344,8 @@ SUBSYSTEM_DEF(ticker)
 			explosion(epi, 0, 256, 512, 0, TRUE, TRUE, 0, TRUE)
 
 /datum/controller/subsystem/ticker/proc/create_characters()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			GLOB.joined_player_list += player.ckey
 			player.create_character(FALSE)
@@ -354,8 +354,8 @@ SUBSYSTEM_DEF(ticker)
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/P = i
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/P = i
 		if(P.new_character && P.new_character.mind)
 			SSticker.minds += P.new_character.mind
 		CHECK_TICK
@@ -363,8 +363,8 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
 	var/captainless=1
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/N = i
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/N = i
 		var/mob/living/carbon/human/player = N.new_character
 		if(istype(player) && player.mind && player.mind.assigned_role)
 			if(player.mind.assigned_role == "Captain")
@@ -375,16 +375,16 @@ SUBSYSTEM_DEF(ticker)
 					SSquirks.AssignQuirks(N.new_character, N.client, TRUE)
 		CHECK_TICK
 	if(captainless)
-		for(var/i in GLOB.new_player_list)
-			var/mob/dead/new_player/N = i
+		for(var/i in GLOB.new_player_list)
+			var/mob/dead/new_player/N = i
 			if(N.new_character)
 				to_chat(N, "Captainship not forced on anyone.")
 			CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		var/mob/living = player.transfer_character()
 		if(living)
 			qdel(player)
@@ -570,8 +570,8 @@ SUBSYSTEM_DEF(ticker)
 
 //Everyone who wanted to be an observer gets made one now
 /datum/controller/subsystem/ticker/proc/create_observers()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_OBSERVE && player.mind)
 			//Break chain since this has a sleep input in it
 			addtimer(CALLBACK(player, /mob/dead/new_player.proc/make_me_an_observer), 1)
@@ -642,11 +642,29 @@ SUBSYSTEM_DEF(ticker)
 	update_everything_flag_in_db()
 	if(!round_end_sound)
 		round_end_sound = pick(\
-		'sound/roundend/newroundsexy.ogg',
-		'sound/roundend/apcdestroyed.ogg',
-		'sound/roundend/bangindonk.ogg',
-		'sound/roundend/imaghoul.ogg',
-		'sound/roundend/petersondisappointed.ogg'\
+		'sound/roundend/2loud4me.ogg',
+		'sound/roundend/aaaaaaaaaaah.ogg',
+		'sound/roundend/aneurism.ogg',
+		'sound/roundend/ayayaclean.ogg',
+		'sound/roundend/dayton.ogg',
+		'sound/roundend/firstofall.ogg',
+		'sound/roundend/fuckingassholebitch.ogg',
+		'sound/roundend/godfkingdamnit.ogg',
+		'sound/roundend/imnotfuckingbald.ogg',
+		'sound/roundend/isthispoop.ogg',
+		'sound/roundend/lul.ogg',
+		'sound/roundend/maldd.ogg',
+		'sound/roundend/mango.ogg',
+		'sound/roundend/moon2l.ogg',
+		'sound/roundend/moonsconfession.ogg',
+		'sound/roundend/mooonscream.ogg',
+		'sound/roundend/noice.ogg',
+		'sound/roundend/nooooooooooooo.ogg',
+		'sound/roundend/poggers.ogg',
+		'sound/roundend/skrrrt.ogg',
+		'sound/roundend/smile.ogg',
+		'sound/roundend/twentyfourninetynine.ogg',
+		'sound/roundend/youregrounded.ogg'\
 		)
 
 	SEND_SOUND(world, sound(round_end_sound))
