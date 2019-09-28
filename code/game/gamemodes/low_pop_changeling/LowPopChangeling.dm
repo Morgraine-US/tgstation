@@ -10,9 +10,9 @@ GLOBAL_VAR(changeling_team_objective_type) //If this is not null, we hand our th
 
 
 /datum/game_mode/changeling
-	name = "changeling"
-	config_tag = "changeling"
-	report_type = "changeling"
+	name = "low pop changeling"
+	config_tag = "low pop changeling"
+	report_type = "low pop changeling"
 	antag_flag = ROLE_CHANGELING
 	false_report_weight = 10
 	restricted_jobs = list("AI", "Cyborg")
